@@ -1,0 +1,31 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "C/C++: g++.exe build and debug active file",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${fileDirname}\\${fileBasenameNoExtension}.exe", // Path to the compiled executable
+            "args": [], // Arguments to pass to the program (leave empty if none)
+            "stopAtEntry": false, // Set to true to stop at the program's entry point
+            "cwd": "${fileDirname}", // Set the current working directory to the file's directory
+            "environment": [],
+            "externalConsole": false, // Set to true to use an external terminal
+            "MIMode": "gdb", // Use gdb as the debugger
+            "miDebuggerPath": "C:/msys64/ucrt64/bin/gdb.exe", // Path to gdb
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                },
+                {
+                    "description": "Set Disassembly Flavor to Intel",
+                    "text": "-gdb-set disassembly-flavor intel",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "C/C++: g++.exe build active file" // Build task to run before debugging
+        }
+    ]
+}

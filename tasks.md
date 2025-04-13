@@ -11,8 +11,8 @@ Output:
 The sum of the numbers calculated by multiple threads
 Execution time comparison between single-threaded and multi-threaded execution
 Covered Topics:
-✅ std::thread – Creating and managing threads
-✅ std::mutex – Preventing race conditions
+✅ std::thread – Creating and managing threads +
+✅ std::mutex – Preventing race conditions + 
 ✅ std::condition_variable – Thread synchronization
 ✅ std::future and std::async – Alternative threading models
 
