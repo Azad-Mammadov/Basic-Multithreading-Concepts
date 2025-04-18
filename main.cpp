@@ -13,14 +13,16 @@ bool thread2_done = false; // Flag to indicate when Thread 2 is done
 void timer1() {
     for (int i = 0; i < 10; ++i) {
         {
+            // Lock the mutex to safely access std::cout 
             std::lock_guard<std::mutex> lock(cout_mutex);
             std::cout << "Thread 1: " << i + 1 << std::endl;
         }
-        std::this_thread::sleep_for(std::chrono::milliseconds(500)); // Sleep for 500ms
+        std::this_thread::sleep_for(std::chrono::milliseconds(500)); // Sleep for 500ms 
     }
 
     // Notify Thread 2 that Thread 1 is done
     {
+        // Lock the mutex to safely update the shared flag `thread1_done`
         std::lock_guard<std::mutex> lock(cout_mutex);
         thread1_done = true;
     }
@@ -30,6 +32,7 @@ void timer1() {
 void timer2() {
     // Wait for Thread 1 to finish
     {
+        // Lock the mutex while waiting for the condition variable
         std::unique_lock<std::mutex> lock(cout_mutex);
         cv1.wait(lock, [] { return thread1_done; }); // Wait until thread1_done is true
     }
@@ -37,6 +40,7 @@ void timer2() {
     // Thread 2 starts after Thread 1 is done
     for (int i = 0; i < 10; ++i) {
         {
+            // Lock the mutex to safely access std::cout
             std::lock_guard<std::mutex> lock(cout_mutex);
             std::cout << "Thread 2: " << i + 1 << std::endl;
         }
@@ -45,6 +49,7 @@ void timer2() {
 
     // Notify Thread 3 that Thread 2 is done
     {
+        // Lock the mutex to safely update the shared flag `thread2_done`
         std::lock_guard<std::mutex> lock(cout_mutex);
         thread2_done = true;
     }
@@ -54,6 +59,7 @@ void timer2() {
 void timer3() {
     // Wait for Thread 2 to finish
     {
+        // Lock the mutex while waiting for the condition variable
         std::unique_lock<std::mutex> lock(cout_mutex);
         cv2.wait(lock, [] { return thread2_done; }); // Wait until thread2_done is true
     }
@@ -61,6 +67,7 @@ void timer3() {
     // Thread 3 starts after Thread 2 is done
     for (int i = 0; i < 10; ++i) {
         {
+            // Lock the mutex to safely access std::cout
             std::lock_guard<std::mutex> lock(cout_mutex);
             std::cout << "Thread 3: " << i + 1 << std::endl;
         }

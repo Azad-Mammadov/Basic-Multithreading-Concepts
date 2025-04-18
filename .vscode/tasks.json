@@ -4,17 +4,17 @@
         {
             "type": "cppbuild",
             "label": "C/C++: g++.exe build active file",
-            "command": "C:/msys64/ucrt64/bin/g++.exe",
+            "command": "C:/msys64/ucrt64/bin/g++.exe", // Path to g++ compiler
             "args": [
-                "-fdiagnostics-color=always",
-                "-g",
-                "-std=c++17", // Specify C++17 standard
-                "${file}",
-                "-o",
-                "${fileDirname}\\${fileBasenameNoExtension}.exe"
+                "-fdiagnostics-color=always", // Enable colored diagnostics
+                "-g", // Include debugging symbols
+                "-std=c++17", // Use C++17 standard
+                "${file}", // Input source file
+                "-o", // Output flag
+                "${fileDirname}\\${fileBasenameNoExtension}.exe" // Output executable
             ],
             "options": {
-                "cwd": "C:/msys64/ucrt64/bin"
+                "cwd": "${workspaceFolder}" // Set current working directory to the workspace folder
             },
             "problemMatcher": [
                 "$gcc"
